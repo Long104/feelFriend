@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+{{>baseHead customTitle=customTitle}}
+
+
+    <body>
+        {{>siteHeader}}
+      <section class="section">
+        <div class="container">
+       {{#if onePost}} 
+            <div class="box">
+                <h2>{{onePost.title}}</h2>
+                <div>
+                    <span>{{onePost.post_from}} | </span>
+                    <span class="text-gray">{{onePost.createAtText}}</span>
+                </div>
+                <p>{{onePost.content}}</p>
+            </div>
+<hr>
+
+<div>
+    <form action="/p/{{onePost.id}}/comment" method="post">
+    <p><textarea name="content" placeholder="show the comment " rows="3" ></textarea></p>
+    <p>
+        <input type="text" name="post_from" placeholder="from" value="{{values.from}}">
+    </p>
+    <p>
+        <input type="checkbox" id="input-accepted" name="accepted" >
+        <label for="input-accepted">just accept it bro</label>
+    </p>
+    <p>
+        <button class="button" type="submit">comment</button>
+    </p>
+    <p>
+        {{#if errorMessage}}
+       <p>{{errorMessage}}</p> 
+        {{/if}}
+    </p>
+    </form>
+</div>
+
+            <hr>
+{{#if postComments}}
+       <h4>{{postComments.length}} comments</h4>
+       {{else}}
+       <h4>don't have any comment yet pls comment man</h4>
+       {{/if}}
+       {{#each postComments}}
+       <div class="box">
+        <p>
+            <span>{{this.post_from}} | </span>
+            <span>{{this.createAtText}}</span>
+        </p>
+        <div>
+            <span>{{this.content}}</span>
+        </div>
+       </div>
+       {{/each}}
+       {{else}}
+       <p>can't find the post that you want</p>
+       {{/if}}
+        </div>
+      </section> 
+       {{>siteFooter}} 
+       {{>siteScrollTop}}
+       {{>siteScripts}}
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Post ID = {{postId}} | FeelFriends</title>
+	</head>
+	<body>
+		<p>`post alone postId is {{postId}}`</p>
+	</body>
+</html> --}}

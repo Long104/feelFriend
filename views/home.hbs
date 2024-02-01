@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ {{>baseHead}}
+	<body>
+        {{> siteHeader}}
+        <section class="section">
+        <div class="container">
+            <h2>hi FeelFriends</h2>
+            <p class="mg-bt-large">วันนี้เพื่อนฝสกถาม</p>
+            {{#each allPosts}}
+            <div class="box">
+                <h4><a href="/p/{{this.id}}">{{this.title}}</a></h4>
+                <p>
+                    <span>{{this.post_from}} | </span>
+                    <span class="text-gray">{{this.createAtText}}  </span>
+                </p>
+                {{#if this.commentsCount}}
+                <div>{{this.commentsCount}} comment</div>
+                {{else}}
+                <div>no comment pls come comment</div>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        </section>
+        {{> siteFooter}}
+        {{> siteScrollTop}}
+        {{> siteScripts}}
+
+
+	</body>
+</html>
