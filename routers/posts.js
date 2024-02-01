@@ -10,14 +10,16 @@ async function getPostAndComments(postId) {
 		//get one post
 		const somePosts = await db.select("*").from("post").where("id", +postId);
 		onePost = somePosts[0];
-		onePost.createAtText = dayjs(onePost.createAt).format("D MMM YYYY - HH-mm");
+		onePost.createAtText = dayjs
+			.tz(onePost.createAt)
+			.format("D MMM YYYY - HH-mm");
 
 		postComments = await db
 			.select("*")
 			.from("comment")
 			.where("postId", +postId);
 		postComments = postComments.map((comment) => {
-			const createAtText = dayjs(comment.createAt).format("D MM YYYY HH-mm");
+			const createAtText = dayjs.tz(comment.createAt).format("D MM YYYY HH-mm");
 			return { ...comment, createAtText };
 		});
 	} catch (error) {
